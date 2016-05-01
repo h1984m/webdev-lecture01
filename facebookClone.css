@@ -1,0 +1,211 @@
+* {
+  margin: 0;
+}
+
+#header{
+background-color: #3b5998;
+width: 100%;
+height: 80px;
+}
+
+#headerBox {
+  width: 1000px;
+  height: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#headerLogo{
+  color: white;
+  font-size: 250%;
+  margin-top: 20px;
+  float: left;
+}
+
+#headerLoginform{
+  float: right;
+  margin-top: 20px;
+}
+
+#body {
+  width: 1000px;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#leftSide, #rightSide {
+  width: 50%;
+  height: 100%;
+}
+
+#leftSide {
+  float: left;
+}
+
+#rightSide {
+  float: right;
+}
+
+#firstRow {
+  margin-top: 80px;
+  font-size: 150%;
+  font-family: Lucida Grande;
+  margin-bottom: 40px;
+}
+
+#leftSideTable td {
+  font-family: lucida grande;
+}
+
+.textBold {
+  font-weight: bold;
+}
+
+.textLight {
+  font-size: 90%;
+  color: grey;
+}
+
+#rightSideEmpty {
+  width: 10%;
+  height: 100%;
+  float: left;
+}
+
+#rightSideContent {
+  width: 90%;
+  height: 100%;
+  float: right;
+}
+
+#rightSideText {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#rightSideTextBold {
+  font-family: lucida grande;
+  font-size: 200%;
+  font-weight: bold;
+}
+
+#rightSideTextLight {
+  font-family: lucida grande;
+}
+
+.halfLine {
+  width: 45%;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  border-width: thin;
+  border-style: solid;
+  border-color: grey;
+  margin-bottom: 10px;
+}
+
+.fullLine {
+  width: 92%;
+  height: 30px;
+  font-size: 16px;
+  border-radius: 5px;
+  border-width: thin;
+  border-style: solid;
+  border-color: grey;
+  margin-bottom: 10px;
+}
+
+#signupFormButton {
+  width: 200px;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  margin-top: 10px;
+  font-size: 20px;
+  color: white;
+  background-color: green;
+  border-radius: 5px;
+  border-width: thin;
+  border-style: solid;
+  border-color: green;
+  font-family: lucida grande;
+}
+
+/*--------------------------------*/
+
+#headerUserbox {
+  float: right;
+  margin-top: 20px;
+  margin-right: 5%;
+  color: white;
+  font-size: 150%;
+}
+
+#headerUserbox div {
+  display: inline-block;
+}
+
+#headerUserbox a {
+  color: white;
+}
+
+#headerUserbox a:hover {
+  background-color: darkblue;
+}
+
+.fixedBox {
+  position: fixed;
+}
+
+.space-behind-header {
+  width: 100%;
+  height: 80px;
+}
+
+.post-column {
+  margin-left: 10%;
+  background-color: papayawhip;
+  width: 800px;
+}
+
+.large-empty-space {
+  width: 100%;
+  height: 40px;
+}
+
+.submit-post-frame, .outer-frame, .inner-frame {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+}
+
+.small-empty-space {
+  width: 100%;
+  height: 20px;
+}
+
+.post-textarea {
+  width: 90%;
+  resize: none;
+}
+
+.post-authorname {
+  font-size: 150%;
+}
+
+.post-time {
+  font-size: 80%;
+  color: grey;
+}
+
+
+/*------------------------------------------------*/
+/*--You can ignore this part for the tutorial-----*/
+/*------------------------------------------------*/
+
+#headerWarning {
+  background-color: red;
+  color: white;
+  text-align: center;
+}

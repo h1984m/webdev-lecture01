@@ -1,0 +1,212 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Facebook Clone</title>
+<link rel="stylesheet" type="text/css" href="facebookClone.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+</head>
+
+<header>
+  <div id="header">
+    <div id="headerBox">
+    <div id="headerLogo">
+      facelook
+    </div>
+    <div id="headerLoginform">
+      <form method="post">
+        <input type="text" name="username" placeholder="Email or Phone">
+        <input type="password" name="password" placeholder="Password">
+        <input type="button" value="Log In" onclick="loginUser(this.form)">
+      </form>
+    </div>
+  </div>
+  </div>
+  <div id="headerWarning">
+    <h2>這網頁只適合用作AppAppDuck的教學。 || This is for AppAppDuck's tutorial only.</h2>
+  </div>
+</header>
+
+<body>
+  <div id="body">
+    <div id="leftSide">
+      <div id="firstRow">
+        <p id="firstRowText">Connect with friends and the<br>world around you on Facelook.</p>
+      </div>
+      <table id="leftSideTable">
+      <tr id="secondRow" height="80">
+        <th><img src="fb_image_01.png"></th><td><span class="textBold">&nbsp;See photos and updates</span><span class="textLight">&nbsp;from friends in News Feed.</span></td>
+      </tr>
+      <tr id="thirdRow" height="80">
+        <th><img src="fb_image_02.png"></th><td><span class="textBold">&nbsp;Share what's new</span><span class="textLight">&nbsp;in your life on your Timeline.</span></td>
+      </tr>
+      <tr id="fourthRow" height="80">
+        <th><img src="fb_image_03.png"></th><td><span class="textBold">&nbsp;Find more</span><span class="textLight">&nbsp;of what you're looking for with Facelook Search.</span></td>
+      </tr>
+    </table>
+    </div>
+    <div id="rightSide">
+      <div id="rightSideEmpty">
+      </div>
+      <div id="rightSideContent">
+        <div id="rightSideText">
+          <div id="rightSideTextBold">
+            Sign Up
+          </div>
+          <div id="rightSideTextLight">
+            It’s free and always will be.
+          </div>
+        </div>
+        <div id="rightSideForm">
+          <form method="post">
+            <input type="text" name="firstname" placeholder="First Name" class="halfLine">
+            <input type="text" name="lastname" placeholder="Last Name" class="halfLine"><br>
+            <input type="text" name="contact" placeholder="Email or mobile number" class="fullLine"><br>
+            <input type="text" name="reenter" placeholder="Re-enter email or mobile number" class="fullLine"><br>
+            <input type="password" name="password" placeholder="New password"  class="fullLine"><br>
+            Birthday<br><br>
+            <select name="birthmonth">
+              <option value="none">Month</option>
+              <option value="jan">Jan</option>
+              <option value="feb">Feb</option>
+              <option value="mar">Mar</option>
+              <option value="apr">Apr</option>
+              <option value="may">May</option>
+              <option value="jun">Jun</option>
+              <option value="jul">Jul</option>
+              <option value="aug">Aug</option>
+              <option value="sep">Sep</option>
+              <option value="oct">Oct</option>
+              <option value="nov">Nov</option>
+              <option value="dec">Dec</option>
+            </select>
+            <select name="birthday">
+              <option value="none">Day</option>
+              <option value="01">1</option>
+              <option value="02">2</option>
+              <option value="03">3</option>
+              <option value="04">4</option>
+              <option value="05">5</option>
+              <option value="06">6</option>
+              <option value="07">7</option>
+              <option value="08">8</option>
+              <option value="09">9</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+              <option value="24">24</option>
+              <option value="25">25</option>
+              <option value="26">26</option>
+              <option value="27">27</option>
+              <option value="28">28</option>
+              <option value="29">29</option>
+              <option value="30">30</option>
+              <option value="31">31</option>
+            </select>
+            <select name="birthyear">
+              <option value="none">Year</option>
+              <option value="1990">1990</option>
+              <option value="1991">1991</option>
+              <option value="1992">1992</option>
+              <option value="1993">1993</option>
+              <option value="1994">1994</option>
+              <option value="1995">1995</option>
+            </select><br><br>
+            <input type="radio" name="gender" value="female" id="genderFemale">Female
+            <input type="radio" name="gender" value="male" id="genderMale">Male
+            <br>
+            <button id="signupFormButton" type="button" onclick="checkForm(this.form)">Sign Up</button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+var myFirebaseRef = new Firebase("https://aad-demo01.firebaseio.com/");
+var currentuserID;
+
+function checkForm(form) {
+  var isFemale = ""
+
+  if (document.getElementById('genderFemale').checked == true) {
+    isFemale = "Female";
+  } else if (document.getElementById('genderMale').checked == true) {
+    isFemale = "Male";
+  }
+
+  if (form.firstname.value == "") {
+    alert("Please fill out your first name.")
+  } else if (form.lastname.value =="") {
+      alert("Please fill out your last name.")
+  } else if (form.contact.value != form.reenter.value) {
+    alert("Your contact information doesn't match. Please check it again.")
+  } else if (form.birthmonth.value == "none" || form.birthday.value == "none") {
+    alert("Please fill out your birthday.")
+  } else if (isFemale == "") {
+    alert("Please choose your gender.")
+  } else {
+    registerUser(form, isFemale);
+  }
+
+}
+
+function registerUser(form, isFemale) {
+
+myFirebaseRef.createUser({
+  email    : form.contact.value,
+  password : form.password.value
+}, function(error, userData) {
+  if (error) {
+    alert("Error creating user:", error);
+  } else {
+    alert("Successfully created user account with uid:", userData.uid);
+    var userProfile = myFirebaseRef.child("UserProfile");
+    userProfile.push({
+      firstname: form.firstname.value,
+      lastname: form.lastname.value,
+      birthday: {
+        birthmonth: form.birthmonth.value,
+        birthday: form.birthday.value,
+        birthyear: form.birthyear.value
+      },
+      gender: isFemale,
+      userID: userData.uid
+
+    });
+    window.location.reload()
+  }
+});
+}
+
+function loginUser(form) {
+  myFirebaseRef.authWithPassword({
+  email    : form.username.value,
+  password : form.password.value
+}, function(error, authData) {
+  if (error) {
+    alert("Login Failed!", error);
+  } else {
+    alert("Authenticated successfully with payload:", authData);
+    remember: "sessionOnly"
+    window.location = "mainPage.html"
+  }
+});
+}
+
+</script>
+</html>

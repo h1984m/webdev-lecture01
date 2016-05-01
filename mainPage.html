@@ -1,0 +1,123 @@
+<!doctype html>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Facebook Clone | Main Page</title>
+  <link rel="stylesheet" type="text/css" href="facebookClone.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+  </head>
+  <header>
+    <div id="header" class="fixedBox">
+      <div id="headerBox">
+      <div id="headerLogo">
+        facebook
+      </div>
+      <div id="headerUserbox">
+        <div class="userboxName">User</div>
+        <div>|</div>
+        <a href="mainPage.html"><div>Home</div></a>
+      </div>
+    </div>
+    </div>
+  </header>
+  <script>
+  var currentuserID
+  var currentuserName = "";
+  function authDataCallback(authData) {
+  if (authData) {
+    currentuserID = authData.uid;
+  } else {
+    console.log("User is logged out");
+  }
+}
+// Register the callback to be fired every time auth state changes
+var myFirebaseRef = new Firebase("https://aad-demo01.firebaseio.com/");
+myFirebaseRef.onAuth(authDataCallback);
+
+myFirebaseRef.child("UserProfile").orderByChild("userID").equalTo(currentuserID).on("value", function(snapshot) {
+  for (profileKey in snapshot.val()){
+    myFirebaseRef.child("UserProfile").child(profileKey).on("value", function(snapshot) {
+      var results = snapshot.val()
+      $('.userboxName').empty().append(results.firstname);
+      currentuserName = results.firstname + " " + results.lastname
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+  }
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+
+
+  </script>
+<body>
+  <div class="space-behind-header">
+  </div>
+  <div class="post-column">
+    <div class="large-empty-space">
+    </div>
+    <div class="submit-post-frame">
+      <div class="small-empty-space">
+      </div>
+      <form>
+        <textarea rows="10" class="post-textarea" name="content" placeholder="Write a post..."></textarea><br />
+        <input type="button" value="Submit" class="post-button" onClick="submitPost(this.form)">
+      </form>
+      <div class="small-empty-space">
+      </div>
+    </div>
+    <div class="large-empty-space">
+    </div>
+    <div class="outer-frame">
+      <div class="small-empty-space"></div>
+      <div class="inner-frame">
+        <div class="post-authorname">Geroge Washington</div>
+        <div class="post-time">12m ago</div>
+        <br />
+        <div class="post-content">Hello World!</div>
+      </div>
+      <div class="small-empty-space"></div>
+    </div>
+    <div class="large-empty-space">
+    </div>
+  </div>
+</body>
+<script>
+  function submitPost(form){
+    var createPost = myFirebaseRef.child("Posts");
+    createPost.push({
+      authorID: currentuserID,
+      authorName: currentuserName,
+      postTime: Firebase.ServerValue.TIMESTAMP,
+      content: form.content.value
+    });
+    window.location.reload()
+  }
+
+  function generatePost(){
+    myFirebaseRef.child("Posts").orderByChild("postTime").on("value", function(snapshot) {
+      for (postKey in snapshot.val()){
+        myFirebaseRef.child("Posts").child(postKey).on("value", function(snapshot) {
+          var results = snapshot.val()
+          var timeStamp = showTime(results.postTime)
+          $('.post-column').append('<div class="outer-frame"><div class="small-empty-space"></div><div class="inner-frame"><div class="post-authorname">' + results.authorName + '</div><div class="post-time">' + timeStamp + '</div><br /><div class="post-content">' + results.content + '</div></div><div class="small-empty-space"></div></div><div class="large-empty-space"></div>')
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
+    });
+      }
+}, function (errorObject) {
+  console.log("The read failed: " + errorObject.code);
+});
+  }
+
+  generatePost();
+
+
+  function showTime(time) {
+    var timeNow = new Date(time);
+    return timeNow
+  }
+</script>
+</html>
