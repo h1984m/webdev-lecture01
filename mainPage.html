@@ -33,7 +33,12 @@
   }
 }
 // Register the callback to be fired every time auth state changes
-var myFirebaseRef = new Firebase("https://aad-demo01.firebaseio.com/");
+var myFirebaseRef = new Firebase("https://change-this-to-your-firebase.firebaseio.com/");
+
+if (myFirebaseRef == "https://change-this-to-your-firebase.firebaseio.com/") {
+alert("請將MyFirebaseRef裡面的'change-this-to-your-firebase'部份換成自己的連結，然後你可以將這個alert刪除。")
+};
+
 myFirebaseRef.onAuth(authDataCallback);
 
 myFirebaseRef.child("UserProfile").orderByChild("userID").equalTo(currentuserID).on("value", function(snapshot) {
